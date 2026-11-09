@@ -11,7 +11,7 @@ class okienko():
         self.statek=None
     def zajac(self,statek):
         self.wolne = False
-        self.statel = statek
+        self.statek = statek
     def sprawdz(self):
         return self.wolne
     def laczna_szybkosc_dzwigow(self):
@@ -19,7 +19,8 @@ class okienko():
         for dzwig in self.dzwigi:
             sum+=dzwig.jaka_szybkosc()
         return sum
-    def rozladuj_statek(self):
+    def rozladuj_statek(self, maks_pojemnosc):
         statek = self.statek
         szybkosc = self.laczna_szybkosc_dzwigow()
-        # statek.rozladuj_kontenery(liczba_kontenerow)
+        return statek.rozladuj_kontener(min(szybkosc, maks_pojemnosc))
+    
