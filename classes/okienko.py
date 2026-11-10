@@ -1,10 +1,13 @@
-from classes import dzwig
+from classes import brama, dzwig
 
 
 class okienko():
-    def __init__(self):
+    def __init__(self,liczba_bram,pojemnosc_magazynu):
         self.wolne=True
         self.dzwigi = [dzwig(3) for _ in range(3)]
+        self.bramy = [brama() for _ in range(liczba_bram)]
+        self.maks_pojemnosc_magazynu = pojemnosc_magazynu
+        self.liczba_kontenerow_w_magazynie = pojemnosc_magazynu
         self.statek=None
     def zwolnic(self):
         self.wolne = True
@@ -19,8 +22,14 @@ class okienko():
         for dzwig in self.dzwigi:
             sum+=dzwig.jaka_szybkosc()
         return sum
-    def rozladuj_statek(self, maks_pojemnosc):
+    def zabierz_kontenery_z_magazynu(self):
+        pass
+    def rozladuj_statek(self):
         statek = self.statek
         szybkosc = self.laczna_szybkosc_dzwigow()
-        return statek.rozladuj_kontener(min(szybkosc, maks_pojemnosc))
-    
+        maks_pojemnosc=self.liczba_wolnych_miejsc()
+        liczba_kontenerow = statek.rozladuj_kontener(min(szybkosc, maks_pojemnosc))
+    def liczba_wolnych_miejsc(self):
+        return self.maks_pojemnosc_magazynu - self.liczba_kontenerow_w_magazynie
+    def zamagazynuj_kontenery(self, liczba):
+            self.liczba_kontenerow_w_magazynie+=liczba
