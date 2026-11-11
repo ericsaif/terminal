@@ -11,15 +11,30 @@ class terminal():
 
     def przydzielenie_okienka_dla_statka(self):
         for okienko in self.okienka:
-            if okienko.sprawdz():
+            if okienko.jest_wolne():
                 statek = self.kolejka_s.pop()
+                # to do wskaznika jakosci
+                czas_oczekiwania = statek.zwroc_czas_oczekiwania()
                 okienko.zajac(statek)
                 
     def przydzielenie_bramy(self, ciezarowka):
         self.kolejka_c.append(ciezarowka)
 
-    def krok(self):
+    def zwieksz_czas_oczekiwania(self):
+        list(lambda x : x.zwieksz_czas_oczekiwania(),map(self.kolejka_c))
+        list(lambda x : x.zwieksz_czas_oczekiwania(),map(self.kolejka_s))
+
+    # moze tu dodac liste statkow i liste ciezarowek, domyslnie puste
+    def krok(self, statek=None):
+        self.zwieksz_czas_oczekiwania()
+        if statek:
+            self.przyjmij_statek_do_kolejki(statek)
+        self.przydzielenie_okienka_dla_statka()
+        # przydzielenie_bramy dla ciezarowki
         for okienko in self.okienka:
-            # przydzielenie_bramy
             okienko.zabierz_kontenery_z_magazynu()
             okienko.rozladuj_statek()
+
+    def statystyka(self):
+        # return statystyka, wskazniki jakosci
+        pass

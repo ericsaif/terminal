@@ -23,5 +23,6 @@ CZESTOTLIWOSC_CIEZAROWEK=2
 Terminal = terminal(MAKS_POJEMNOSC_MAGAZYNU, MAKS_LICZBA_OKIENEK_S, MAKS_LICZBA_BRAM)
 min_w_tygodniu = 7*1440
 
+
 for i in range(min_w_tygodniu):
-    pass
+    Terminal.krok()
