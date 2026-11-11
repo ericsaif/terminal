@@ -23,12 +23,18 @@ class okienko():
             sum+=dzwig.jaka_szybkosc()
         return sum
     def zabierz_kontenery_z_magazynu(self):
-        pass
+        if self.liczba_kontenerow_w_magazynie <= 0:
+            return
+        szybkosc = 0
+        for brama in self.bramy:
+            szybkosc+=brama.szybkosc()
+        self.liczba_kontenerow_w_magazynie-=szybkosc
     def rozladuj_statek(self):
         statek = self.statek
         szybkosc = self.laczna_szybkosc_dzwigow()
         maks_pojemnosc=self.liczba_wolnych_miejsc()
         liczba_kontenerow = statek.rozladuj_kontener(min(szybkosc, maks_pojemnosc))
+        self.zamagazynuj_kontenery(liczba_kontenerow)
     def liczba_wolnych_miejsc(self):
         return self.maks_pojemnosc_magazynu - self.liczba_kontenerow_w_magazynie
     def zamagazynuj_kontenery(self, liczba):
