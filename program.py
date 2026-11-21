@@ -1,7 +1,9 @@
-from classes import terminal
-MAKS_POJEMNOSC_MAGAZYNU = 12000  # [0-12000]
+import time
+
+from classes.terminal import terminal
+MAKS_POJEMNOSC_MAGAZYNU = 1200000  # [0-12000]
 MAKS_LICZBA_OKIENEK_S = 60  # [0-60]
-MAKS_LICZBA_BRAM = 30  # [0-30]
+MAKS_LICZBA_BRAM = 2  # [0-30]
 LICZBA_DZWIGOW_PRZY_KAZDYM_OKIENKU_S = 3  # [0-3]
 LICZBA_DZWIGOW_PRZY_KAZDEJ_BRAMIE = 1  # [0-1]
 
@@ -21,8 +23,18 @@ CZESTOTLIWOSC_STATKOW = 5
 CZESTOTLIWOSC_CIEZAROWEK=2
 
 Terminal = terminal(MAKS_POJEMNOSC_MAGAZYNU, MAKS_LICZBA_OKIENEK_S, MAKS_LICZBA_BRAM)
-min_w_tygodniu = 7*1440
 
+godzin_w_dniu = 24
+liczba_dni = 10
 
-for i in range(min_w_tygodniu):
+start = time.time()
+for i in range(liczba_dni * godzin_w_dniu):
     Terminal.krok()
+
+end = time.time()
+
+print(end - start)
+
+statki, kontenery, prz_statki = Terminal.statystyka()
+
+print("statki=", statki, "kontenery=",kontenery, "prz_statki=", prz_statki)
