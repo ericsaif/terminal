@@ -7,7 +7,7 @@ class brama():
         self.ciezarowka=None
 
     def wolna(self):
-        return self.ciezarowka is not None
+        return self.ciezarowka is None
 
     def zajac(self, c):
         self.ciezarowka = c

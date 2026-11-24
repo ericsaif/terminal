@@ -1,6 +1,6 @@
 import random
 
-from classes import brama
+from classes.brama import brama
 from classes.ciezarowka import element_kolejki
 from classes.statek import statek
 from classes.okienko import okienko
@@ -28,19 +28,21 @@ class terminal():
 
     def przydzielenie_okienek_i_bram(self):
         for okienko in self.okienka:
+            if not self.kolejka_s:
+                break
             if okienko.jest_wolne():
-                if self.kolejka_s:
-                    statek = self.kolejka_s.pop(0)
+                statek = self.kolejka_s.pop(0)
 
-                    # to do wskaznika jakosci
-                    czas_oczekiwania = statek.zwroc_czas_oczekiwania()
-                    okienko.zajac(statek)
+                # to do wskaznika jakosci
+                czas_oczekiwania = statek.zwroc_czas_oczekiwania()
+                okienko.zajac(statek)
             
-            if self.kolejka_c:
-                for brama in okienko.wolne_bramy():
-                    ciezarowka = self.kolejka_c.pop(0)
-                    brama.zajac(ciezarowka)
-                    czas_oczekiwania_c = ciezarowka.zwroc_czas_oczekiwania()
+            for brama in okienko.wolne_bramy():
+                if not self.kolejka_c:
+                    break
+                ciezarowka = self.kolejka_c.pop(0)
+                brama.zajac(ciezarowka)
+                czas_oczekiwania_c = ciezarowka.zwroc_czas_oczekiwania()
                 
     def przydzielenie_bramy(self, ciezarowka):
         self.kolejka_c.append(ciezarowka)

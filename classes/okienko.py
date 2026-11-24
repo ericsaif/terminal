@@ -44,6 +44,9 @@ class okienko():
 
     def rozladuj_statek(self):
         statek = self.statek
+
+        if statek is None:
+            return True
         
         szybkosc = self.laczna_szybkosc_dzwigow()
         maks_pojemnosc=self.liczba_wolnych_miejsc()

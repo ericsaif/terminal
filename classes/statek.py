@@ -12,7 +12,7 @@ class statek(element_kolejki):
         self.typ="A"
 
     def rozladuj_kontener(self, liczba_kontenerow):
-        if liczba_kontenerow>self.ilosc_kontenerow:
+        if liczba_kontenerow>=self.ilosc_kontenerow:
             return self.ilosc_kontenerow, True
         # print(self.ilosc_kontenerow,  liczba_kontenerow, self.ilosc_kontenerow)
 
