@@ -48,7 +48,7 @@ class terminal():
         list(map(lambda x : x.zwieksz_czas_oczekiwania(),self.kolejka_c))
         list(map(lambda x : x.zwieksz_czas_oczekiwania(),self.kolejka_s))
 
-    def rand_gaus(self, mu, s):
+    def rand_gaus(self, mu, s): 
         return int(random.gauss(mu,s))
 
     # moga pojawiac sie statki typu T - puste statki, które zabierają kontenery z magazynu
