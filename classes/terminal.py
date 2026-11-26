@@ -43,9 +43,6 @@ class terminal():
                 ciezarowka = self.kolejka_c.pop(0)
                 brama.zajac(ciezarowka)
                 czas_oczekiwania_c = ciezarowka.zwroc_czas_oczekiwania()
-                
-    def przydzielenie_bramy(self, ciezarowka):
-        self.kolejka_c.append(ciezarowka)
 
     def zwieksz_czas_oczekiwania(self):
         list(map(lambda x : x.zwieksz_czas_oczekiwania(),self.kolejka_c))
@@ -56,16 +53,15 @@ class terminal():
 
     # moga pojawiac sie statki typu T - puste statki, które zabierają kontenery z magazynu
     def pojawienie_sie_statkow(self):
-        return self.rand_gaus(5,1.67)
+        return self.rand_gaus(1.0, 0.816496580927726)
     
     def pojawienie_sie_ciezarowek(self):
-        return self.rand_gaus(10,3.33)
+        return self.rand_gaus(9.5, 5.766281297335398)
 
     def pojawienie_sie_pociagow(self):
         return self.rand_gaus(10,3.33)
 
 
-    # moze tu dodac liste statkow i liste ciezarowek, domyslnie puste
     def krok(self):
         self.zwieksz_czas_oczekiwania()
 
@@ -84,11 +80,11 @@ class terminal():
         for okienko in self.okienka:
             wolne=False
             kontenery = okienko.zabierz_kontenery_z_magazynu()
+            self.wyslane_kontenery+=kontenery
             if not okienko.jest_wolne():
                 wolne=okienko.rozladuj_statek()
                 if wolne:
                     self.obsluzone_statki+=1
-            self.wyslane_kontenery+=kontenery
 
     def statystyka(self):
         return self.obsluzone_statki, self.wyslane_kontenery, self.przyjete_statki
